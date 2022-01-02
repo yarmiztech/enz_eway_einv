@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="eway_consolidation_tree" model="ir.ui.view">
+        <field name="name">eway.consolidation.tree</field>
+        <field name="model">eway.consolidation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="transportation_mode" widget="radio"/>
+                <field name="transporter_id"/>
+                <field name="state_id"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="eway_re_consolidation_tree" model="ir.ui.view">
+        <field name="name">eway.re.consolidation.tree</field>
+        <field name="model">eway.re.consolidation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="consolidated_no"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="eway_consolidation_forms" model="ir.ui.view">
+        <field name="name">eway.consolidation.form</field>
+        <field name="model">eway.consolidation</field>
+        <field name="arch" type="xml">
+            <form string="Transporters">
+                <!--                <header>-->
+                <!--                    <button name="create_access" class="oe_highlight"-->
+                <!--                            string="Access Token"-->
+                <!--                            type="object"/>-->
+                <!--                </header>-->
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="transportation_mode" widget="radio" options="{'horizontal': true}"/>
+                            <field name="transporter" required="1"/>
+                            <field name="transporter_id" required="1"/>
+                            <field name="request_id" invisible="1"/>
+                            <field name="request_char" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="state_id" required="1"/>
+                            <field name="place"/>
+                            <field name="vehicle_number" required="1"/>
+                        </group>
+                    </group>
+                    <!--                    <notebook>-->
+                    <!--                             <page string="Sales Information">-->
+                    <field name="eway_details">
+                        <tree string="E-way Details" editable="bottom">
+                            <field name="select"/>
+                            <field name="eway_bill_no"/>
+                            <field name="invoice_number"/>
+                            <field name="order_number" invisible="1"/>
+                            <field name="confirmation_date"/>
+                            <field name="partner_id"/>
+                            <field name="sales_person"/>
+                            <field name="total"/>
+                            <field name="invoice_status"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button string="Generate E-way Bill" name="consolidate_eway" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="eway_re_consolidationforms" model="ir.ui.view">
+        <field name="name">eway.re.consolidationform</field>
+        <field name="model">eway.re.consolidation</field>
+        <field name="arch" type="xml">
+            <form string="Transporters">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="consolidated_no"/>
+                            <field name="consolidated_m_no"/>
+
+                        </group>
+                    </group>
+<!--                    <field name="eway_details">-->
+<!--                        <tree string="E-way Details" editable="bottom">-->
+<!--                            <field name="consolidated_no"/>-->
+<!--                        </tree>-->
+<!--                    </field>-->
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actions_eway_consolidation" model="ir.actions.act_window">
+        <field name="name">Consolidate Bills</field>
+        <field name="res_model">eway.consolidation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+    <record id="actions_re_consolidation" model="ir.actions.act_window">
+        <field name="name">Re Consolidate Bills</field>
+        <field name="res_model">eway.re.consolidation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+
+    <record id="eway_cancellation_tree" model="ir.ui.view">
+        <field name="name">eway.cancellation.tree</field>
+        <field name="model">eway.cancellation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reason" required="1"/>
+                <field name="description" required="1"/>
+                <field name="order_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="eway_cancellation_forms" model="ir.ui.view">
+        <field name="name">eway.cancellation.form</field>
+        <field name="model">eway.cancellation</field>
+        <field name="arch" type="xml">
+            <form string="Transporters">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reason" required="1"/>
+
+                        </group>
+                        <group>
+                             <field name="description" required="1"/>
+                            <field name="order_id" readonly="1" invisible="1"/>
+                            <field name="account_id" />
+                            <field name="request_id" invisible="1"/>
+                            <field name="request_char" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="E-way Bill Cancel" name="cancel_eway" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="actions_eway_cancellation" model="ir.actions.act_window">
+        <field name="name">E-way Cancel</field>
+        <field name="res_model">eway.cancellation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+    <!--    <menuitem name="Consolidate Bills"-->
+    <!--              id="menu_consolidate" sequence="0"-->
+    <!--              parent="menu_gst_way"-->
+    <!--              action="actions_eway_consolidation"/>-->
+    <menuitem name="Cancel E-way Bills"
+                  id="menu_cancel_eway" sequence="1"
+                  parent="menu_eway_reports"
+                  action="actions_eway_cancellation"/>
+ <menuitem name="Re Consolidation Eway"
+                  id="menu_reconsolidation" sequence="2"
+                  parent="menu_eway_reports"
+                  action="actions_re_consolidation"/>
+
+
+</odoo>

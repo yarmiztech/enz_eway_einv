@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="eway_configuration_tree" model="ir.ui.view">
+        <field name="name">eway.configuration.tree</field>
+        <field name="model">eway.configuration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="asp_id"/>
+                <field name="password"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="eway_configuration_forms" model="ir.ui.view">
+        <field name="name">eway.configuration.form</field>
+        <field name="model">eway.configuration</field>
+        <field name="arch" type="xml">
+            <form string="Freight Discount">
+                <header>
+                    <button name="create_access" class="oe_highlight"
+                            string="Access Token"
+                            type="object"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" groups="base.group_user" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group string="Configuration Details">
+                            <field name="asp_id"/>
+                            <field name="password"/>
+                            <field name="url"/>
+                            <field name="postman_token"/>
+                        </group>
+                        <group>
+                            <field name="gstin"/>
+                            <field name="user_name"/>
+                            <field name="ewb_password"/>
+                            <field name="sand_user_name"/>
+                            <field name="sand_password"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details">
+                            <group>
+                                <group string="E-way Details">
+                                    <field name="access_token"/>
+                                    <field name="access_date"/>
+                                    <field name="access_exp_date"/>
+                                </group>
+                            </group>
+
+                        </page>
+                        <page string="URL TAB">
+                            <group string="URL SETUP">
+                                <group>
+                                    <field name="eway_url"/>
+                                    <field name="consolidate_url"/>
+                                    <field name="eway_by_irn"/>
+                                    <field name="irn_einvoice"/>
+                                    <field name="irn_cancel_url"/>
+                                    <field name="no_of_calls"/>
+                                </group>
+                            </group>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actions_eway_configuration" model="ir.actions.act_window">
+        <field name="name">Eway Configuration</field>
+        <field name="res_model">eway.configuration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+
+    <record id="einvoice_configuration_tree" model="ir.ui.view">
+        <field name="name">einvoice.configuration.tree</field>
+        <field name="model">einvoice.configuration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="asp_id"/>
+                <field name="password"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="einvoice_configuration_forms" model="ir.ui.view">
+        <field name="name">einvoice.configuration.form</field>
+        <field name="model">einvoice.configuration</field>
+        <field name="arch" type="xml">
+            <form string="Freight Discount">
+                <header>
+                    <button name="create_access" class="oe_highlight"
+                            string="Access Token"
+                            type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Configuration Details">
+                            <field name="asp_id"/>
+                            <field name="password"/>
+
+
+                        </group>
+                        <group>
+                            <field name="gstin"/>
+
+                            <!--                            <field name="user_name"/>-->
+                            <!--                            <field name="ewb_password"/>-->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page>
+                            <group>
+                                <group string="E-way Details">
+                                    <field name="access_token"/>
+                                    <field name="access_date"/>
+                                    <field name="access_exp_date"/>
+                                </group>
+                            </group>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actions_einvoice_configuration" model="ir.actions.act_window">
+        <field name="name">E-Invoice Configuration</field>
+        <field name="res_model">einvoice.configuration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="GST E-WAY/E-INV "
+              id="menu_gst_way" web_icon="enz_eway_einv,static/description/icon.png"
+              sequence="21"/>
+
+
+    <menuitem name="Configuration"
+              id="menu_eay_confi" sequence="3"
+              parent="menu_gst_way"
+    />
+  <menuitem name="Reports"
+              id="menu_eway_reports" sequence="1"
+              parent="menu_gst_way"
+    />
+
+    <menuitem name="Eway Configuration"
+              id="menu_inc_pay" sequence="4"
+              parent="menu_eay_confi"
+              action="actions_eway_configuration"/>
+
+    <menuitem name="E Invoice Configuration"
+              id="menu_einv" sequence="5"
+              parent="menu_eay_confi"
+              action="actions_einvoice_configuration"/>
+
+
+
+
+    <record id="eway_eligible_confi_tree" model="ir.ui.view">
+        <field name="name">eway.eligible.configuration.tree</field>
+        <field name="model">eway.eligible.configuration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="company_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="eway_eligible_configuration_forms" model="ir.ui.view">
+        <field name="name">eway.eligible.form</field>
+        <field name="model">eway.eligible.configuration</field>
+        <field name="arch" type="xml">
+            <form string="Freight Discount">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actions_elig_configuration" model="ir.actions.act_window">
+        <field name="name">E-Invoice Eligible Company</field>
+        <field name="res_model">eway.eligible.configuration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+      <menuitem name="E-Invoice Eligible Company"
+              id="menu_einv_eligi" sequence="3"
+              parent="menu_eay_confi"
+              action="actions_elig_configuration"/>
+
+
+
+
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="get_eway_details_byirn_tree" model="ir.ui.view">
+        <field name="name">get.eway.details.byirn.tree</field>
+        <field name="model">get.eway.details.byirn</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="irn"/>
+                <field name="order_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="get_eway_details_byirn_forms" model="ir.ui.view">
+        <field name="name">get.eway.details.byirn.form</field>
+        <field name="model">get.eway.details.byirn</field>
+        <field name="arch" type="xml">
+            <form string="Transporters">
+                <sheet>
+                    <group>
+                        <group>
+                             <field name="irn"/>
+                        </group>
+                        <group>
+                            <field name="order_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Get Tax Payers" name="get_eway_details_byirn" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="actions_get_eway_details_byirn" model="ir.actions.act_window">
+        <field name="name">Get EWAY Details</field>
+        <field name="res_model">get.eway.details.byirn</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Get EWAY Details"
+              id="menu_get_eway_details_byirn" sequence="3"
+              parent="menu_eway_reports"
+              action="actions_get_eway_details_byirn"/>
+
+
+</odoo>

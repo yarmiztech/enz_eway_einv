@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_einvoice_inh" model="ir.ui.view">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="awb_apply"/>
+                <field name="qr_code" invisible="1"/>
+                <field name="request_char"/>
+                <field name="qr_code_image"  widget='image' class="oe_avatar"/>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_open']" position="after">
+                <field name="eligible" invisible="1"/>
+<!--                <button name="action_create_irn"-->
+<!--                        string="Generate IRN" type="object" class="oe_highlight"-->
+<!--                        attrs="{'invisible': [('eligible', '=', False)]}"/>-->
+<!--                <button name="action_irn_cancel"-->
+<!--                        string="IRN Cancel" type="object" class="oe_highlight"-->
+<!--                        attrs="{'invisible': [('eligible', '=', False)]}"/>-->
+                <button name="action_create_irn"
+                        string="Generate IRN" type="object" class="oe_highlight"
+                        />
+                <button name="action_irn_cancel"
+                        string="IRN Cancel" type="object" class="oe_highlight"
+                        />
+            </xpath>
+            <xpath expr="//page[@name='other_info']" position="after">
+                <!--            <xpath expr="//field[@name='partner_id']" position="after">-->
+                <page string="IRN Details">
+                    <group colspan="3">
+                        <group>
+                            <field name="request_id"/>
+                            <field name="request_char"/>
+                            <field name="irn"/>
+                            <field name="irn_ack_dt"/>
+                            <field name="irn_ack_no"/>
+                        </group>
+                        <group>
+                            <field name="canceled_irn"/>
+                            <field name="canceled_irn_date"/>
+                        </group>
+                        <group>
+                            <field name="signed_inv"/>
+                            <field name="signed_qr_inv"/>
+                            <!--                            <field name="signed_einvoice"/>-->
+                            <!--                            <field name="signed_qr_code"/>-->
+                        </group>
+                    </group>
+
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='other_info']" position="after">
+<!--                <page string="E-way Bill Details" attrs="{'invisible': [('awb_apply', '=', False)]}">-->
+                <page string="E-way Bill Details" >
+                    <group string="Transportation Details">
+                        <group>
+                            <field name="state_source"/>
+                            <field name="from_area"/>
+                            <field name="from_pin"/>
+<!--                            <field name="supply_type" attrs="{'required': [('awb_apply', '=',True)]}"/>-->
+<!--                            <field name="document_type" attrs="{'required': [('awb_apply', '=',True)]}"/>-->
+<!--                            <field name="document_date" options="{'format': 'DD/MM/YYYY'}"/>-->
+<!--                            <field name="sub_type_desc"/>-->
+<!--                            <field name="distance" attrs="{'required': [('awb_apply', '=',True)]}"/>-->
+<!--                            <field name="vehicle_number" attrs="{'required': [('awb_apply', '=',True)]}"/> -->
+                            <field name="supply_type" />
+                            <field name="document_type"/>
+                            <field name="document_date" options="{'format': 'DD/MM/YYYY'}"/>
+                            <field name="sub_type_desc"/>
+                            <field name="distance" />
+                            <field name="vehicle_number"/>
+                        </group>
+                        <group>
+                            <field name="state_destination"/>
+                            <field name="to_area"/>
+                            <field name="to_pin"/>
+<!--                            <field name="sub_supply_type" attrs="{'required': [('awb_apply', '=',True)]}"/>-->
+<!--                            <field name="transportation_mode" attrs="{'required': [('awb_apply', '=',True)]}"/>-->
+    <field name="sub_supply_type" />
+                            <field name="transportation_mode"/>
+                            <field name="transporter"/>
+                            <field name="transporter_id"/>
+                            <field name="transporter_doc_no"/>
+<!--                            <field name="transportation_date" attrs="{'required': [('awb_apply', '=',True)]}"/>-->
+<!--                            <field name="vehicle_type" attrs="{'required': [('awb_apply', '=',True)]}"/> -->
+                            <field name="transportation_date" />
+                            <field name="vehicle_type" />
+                        </group>
+                        <group string="E-way Bill Details">
+                            <field name="eway_bill_no"/>
+                            <field name="eway_bill_date"/>
+                            <field name="eway_valid_up"/>
+                        </group>
+                        <group string="Consolidate E-way Bill Details">
+                            <field name="consolidated_e_bill_no"/>
+                            <field name="consolidated_e_bill_date"/>
+                        </group>
+                        <group string="E-way Bill Cancel Details">
+                            <field name="e_bill_cancel_date"/>
+                        </group>
+                        <group string="Vehicle Update Details">
+                            <field name="vehicleUpdate"/>
+                            <field name="vehicleUpto"/>
+                            <field name="ewbRejectedDate"/>
+                            <field name="ewbRejectedDate"/>
+                        </group>
+<!--                        <group string="IRN">-->
+<!--                            <field name="irn"/>-->
+<!--                            <field name="irn_ack_dt"/>-->
+
+<!--                        </group>-->
+                        <group string="E invoice">
+                            <field name="signed_einvoice"/>
+                            <field name="signed_qr_code"/>
+<!--                            <field name="qr_code" />-->
+<!--                            <field name="image"/>-->
+                            <field name="canceled_irn"/>
+                            <field name="canceled_irn_date"/>
+                            <field name="cancel_ewb_apis"/>
+                            <field name="cancel_ewb_api_date"/>
+
+                        </group>
+                    </group>
+                </page>
+<!--                <page string="Complete Buttons" attrs="{'invisible': [('awb_apply', '=', False)]}">-->
+                <page string="Complete Buttons">
+                    <group>
+                        <group col="6">
+                            <button name="action_e_way_confirm"
+                                    string="Generate E-way" type="object" class="oe_highlight"/>
+                            <button name="action_consolidate"
+                                    string="Consolidate E-way" type="object" class="oe_highlight"/>
+                            <button name="action_eway_cancel"
+                                    string="E-way Cancel" type="object" class="oe_highlight"/>
+<!--                            <button name="action_update_vehicle"-->
+<!--                                    string="Update vehicle" type="object" class="oe_highlight"/>-->
+<!--                            <button name="action_reject_vehicle"-->
+<!--                                    string="Reject AWB" type="object" class="oe_highlight"/>-->
+<!--                            <button name="re_consilidate_eway"-->
+<!--                                    string="Re Generated Consolidate" type="object" class="oe_highlight"/>-->
+                            <button name="extended_eway"
+                                    string="Extend Eway" type="object" class="oe_highlight"/>
+<!--                            <button name="action_create_irn"-->
+<!--                                    string="IRN Generate" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_einvoice_by_irn"-->
+<!--                                    string="Get Einvoice By IRN" type="object" class="oe_highlight"/>-->
+                            <button name="generate_eway_by_irn"
+                                    string="Generate Eway By IRN" type="object" class="oe_highlight"/>
+<!--                            <button name="extract_qr_code"-->
+<!--                                    string="Extract Qr Code" type="object" class="oe_highlight"/>-->
+<!--                            <button name="extract_signed_invoice"-->
+<!--                                    string="Extract Signed Invoice" type="object" class="oe_highlight"/>-->
+<!--                            <button name="generate_qr_image"-->
+<!--                                    string="Generate QR Image" type="object" class="oe_highlight"/>-->
+<!--                            <button name="action_irn_cancel"-->
+<!--                                    string="IRN Cancel" type="object" class="oe_highlight"/>-->
+<!--                            <button name="cancel_ewb_api"-->
+<!--                                    string="Cancel EWB API" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_eway_taxpayers"-->
+<!--                                    string="Get Eway Tax Payers" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_synchronize_gstin"-->
+<!--                                    string="Get Synch GSTIN" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_eway_details_by_irn"-->
+<!--                                    string="Get E-way Details/IRN" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_irn_details_by_docs"-->
+<!--                                    string="Get E-way Details By Docs" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_eway_for_transporter"-->
+<!--                                    string="Get E-way For Transporter" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_eway_for_trans_gstin"-->
+<!--                                    string="Get E-way For Transporter/GSTIN" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_eway_for_other"-->
+<!--                                    string="Get E-way For Other" type="object" class="oe_highlight"/>-->
+<!--                            <button name="get_consolidate_eway"-->
+<!--                                    string="Get Consolidate E-way" type="object" class="oe_highlight"/>-->
+
+                        </group>
+                    </group>
+                </page>
+
+
+            </xpath>
+
+        </field>
+    </record>
+
+
+</odoo>

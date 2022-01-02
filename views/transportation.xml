@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="transportation_details_tree" model="ir.ui.view">
+        <field name="name">transportation.details.tree</field>
+        <field name="model">transportation.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="transportation_mode"/>
+                <field name="email_id"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="transportation_details_forms" model="ir.ui.view">
+        <field name="name">transportation.details.form</field>
+        <field name="model">transportation.details</field>
+        <field name="arch" type="xml">
+            <form string="Transporters">
+                <header>
+                    <button name="create_access" class="oe_highlight"
+                            string="Access Token"
+                            type="object"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Transporter Details">
+                            <field name="transportation_mode"/>
+                            <field name="email_id"/>
+
+
+                        </group>
+                        <group>
+                            <field name="transportation_date"/>
+                            <field name="transporter_id"/>
+                            <field name="mobile"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page>
+                            <group string="Address">
+                                <group>
+                                    <field name="street_one"/>
+                                    <field name="street_two"/>
+                                    <field name="state_id" required="1"/>
+                                </group>
+                                <group>
+
+                                    <field name="country_id" required="1"/>
+                                    <field name="city"/>
+                                    <field name="zip" required="1"/>
+                                </group>
+                            </group>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actions_transportation_details" model="ir.actions.act_window">
+        <field name="name">Transporters</field>
+        <field name="res_model">transportation.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Transporters"
+              id="menu_transportation" sequence="0"
+              parent="menu_gst_way"
+              action="actions_transportation_details"/>
+
+
+    <record id="pin_information_tree" model="ir.ui.view">
+        <field name="name">pin.information.tree</field>
+        <field name="model">pin.information</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="from_area"/>
+                <field name="from_pin"/>
+                <field name="to_area"/>
+                <field name="to_pin"/>
+                <field name="distance"/>
+            </tree>
+        </field>
+    </record>
+    <record id="pin_information_forms" model="ir.ui.view">
+        <field name="name">pin.information.form</field>
+        <field name="model">pin.information</field>
+        <field name="arch" type="xml">
+            <form string="Transporters">
+                <header>
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_area"/>
+                            <field name="from_pin"/>
+
+
+                        </group>
+                        <group>
+                            <field name="to_area"/>
+                            <field name="to_pin"/>
+                            <field name="distance"/>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actions_pin_information" model="ir.actions.act_window">
+        <field name="name">PIN Configuration</field>
+        <field name="res_model">pin.information</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="PIN Configuration"
+              id="menu_pin_configuration" sequence="1"
+              parent="menu_eay_confi"
+              action="actions_pin_information"/>
+
+
+
+
+    <record id="executive_area_wise_tree" model="ir.ui.view">
+        <field name="name">executive.area.wise.tree</field>
+        <field name="model">executive.area.wise</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="pin_code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="executive_area_wise_forms" model="ir.ui.view">
+        <field name="name">executive.area.wise.form</field>
+        <field name="model">executive.area.wise</field>
+        <field name="arch" type="xml">
+            <form string="Areas">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                            <field name="name"/>
+                            <field name="pin_code"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actions_executive_area_wise" model="ir.actions.act_window">
+        <field name="name">Area Config</field>
+        <field name="res_model">executive.area.wise</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+     <menuitem name="Area Config"
+              id="menu_area_config" sequence="0"
+              parent="menu_eay_confi"
+              action="actions_executive_area_wise"/>
+
+
+
+
+</odoo>
